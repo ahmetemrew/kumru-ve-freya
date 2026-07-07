@@ -1,0 +1,13 @@
+torch
+numpy
+einops
+soundfile
+librosa
+huggingface_hub
+safetensors
+voxcpm
+
+# evaluation only
+# faster-whisper
+# jiwer
+# datasets

@@ -1,0 +1,40 @@
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.python-version
+
+# tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# checkpoints and model files
+checkpoints/
+runs/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+*.onnx
+*.mlpackage/
+
+# data and audio outputs
+data/
+outputs/
+*.wav
+*.flac
+*.mp3
+*.npy
+*.npz
+
+# environment and OS
+.env
+.DS_Store

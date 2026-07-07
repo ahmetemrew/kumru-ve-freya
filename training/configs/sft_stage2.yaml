@@ -1,0 +1,28 @@
+# FreyaTTS SFT stage 2 (short-utterance coverage): continues from stage 1 on a
+# mix that adds short segments (see training/extract_short_segments.py), with a
+# lower learning rate and a stronger duration loss.
+# usage: accelerate launch training/sft.py --config training/configs/sft_stage2.yaml
+
+init: checkpoints/sft_stage1/final/model.pt
+data: data/latents_sft_short
+vocab_json: freyatts/char_vocab.json
+out: checkpoints/sft_stage2
+
+d_model: 768
+depth: 22
+heads: 12
+ff: 2048
+
+steps: 3000  # short stage; our released checkpoints were selected around step 1000
+batch_size: 64
+grad_accum: 1
+lr: 5.0e-5
+warmup: 2000
+lambda_dur: 0.2
+
+max_frames: 500
+num_workers: 3
+
+save_every: 10000
+log_every: 50
+seed: 0
