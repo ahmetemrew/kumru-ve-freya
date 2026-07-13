@@ -19,12 +19,14 @@ import numpy as np
 import soundfile as sf
 import torch
 
+from freyatts.model import LEYLA_SEED
+
 SAMPLE_RATE = 48000
 SAMPLES_PER_FRAME = 1920  # 48 kHz audio over 25 Hz latents
 
 
 @torch.no_grad()
-def synthesize_batch(model, vae, char_to_id, texts, steps=32, seed=0, device="cuda"):
+def synthesize_batch(model, vae, char_to_id, texts, steps=32, seed=LEYLA_SEED, device="cuda"):
     """Synthesize a list of texts in one padded batch. Returns a list of waveforms."""
     ids_list = [torch.tensor([char_to_id.get(ch, 1) for ch in t], device=device) for t in texts]
     max_chars = max(len(item) for item in ids_list)
@@ -45,8 +47,13 @@ def synthesize_batch(model, vae, char_to_id, texts, steps=32, seed=0, device="cu
     for row, n in enumerate(lengths):
         frame_mask[row, :n] = True
 
-    torch.manual_seed(seed)
-    x = torch.randn(len(texts), max_frames, 64, device=device)
+
+    if seed is None:
+        x = torch.randn(1, max_frames, 64, device=device)
+    else:
+        gen = torch.Generator(device=device).manual_seed(int(seed))
+        x = torch.randn(1, max_frames, 64, device=device, generator=gen)
+    x = x.expand(len(texts), -1, -1).contiguous()
     for i in range(steps):
         t = torch.full((len(texts),), i / steps, device=device)
         x = x + model(x, t, context, frame_mask, char_mask) / steps

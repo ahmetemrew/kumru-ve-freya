@@ -61,7 +61,9 @@ wav = tts.synthesize("Merhaba, size nasıl yardımcı olabilirim?")   # np.float
 tts.save_wav(wav, "output.wav")
 ```
 
-`from_pretrained` also accepts a local directory containing `config.json` and `model.safetensors`. `synthesize` takes optional `steps` (default 32) and `seed` (default 0) arguments. Long inputs are normalized and split into clauses automatically, then joined with short pauses. Normalization spells out digit runs in Turkish (`14:45` becomes `on dört kırk beş`): the duration predictor sizes the utterance from the character sequence, so numbers left as digits come out truncated.
+`from_pretrained` also accepts a local directory containing `config.json` and `model.safetensors`. `synthesize` takes optional `steps` (default 32) and `seed` (default `LEYLA_SEED`) arguments.
+
+**The seed selects the speaker.** FreyaTTS conditions only on text — there is no speaker embedding, speaker id, or reference-audio prefix — so the initial flow-matching noise `x0` *is* the voice. Fine-tuning collapses the model onto the Leyla voice, but it does not condition on her, so a different seed gives a different person and some seeds are not Leyla at all. The default seed is pinned to the canonical Leyla voice and is deterministic: the same text returns the same waveform every call. Use one seed per utterance (the pipeline already shares it across clauses of a long input); passing `seed=None` opts into random-speaker sampling. Long inputs are normalized and split into clauses automatically, then joined with short pauses. Normalization spells out digit runs in Turkish (`14:45` becomes `on dört kırk beş`): the duration predictor sizes the utterance from the character sequence, so numbers left as digits come out truncated.
 
 Or run the bundled example:
 

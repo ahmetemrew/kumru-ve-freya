@@ -15,7 +15,7 @@ import re
 import numpy as np
 import torch
 
-from .model import FreyaDiT
+from .model import LEYLA_SEED, FreyaDiT
 from .vae import load_audio_vae
 
 FILL_ID = 0
@@ -116,12 +116,12 @@ class FreyaTTS:
     concatenated with short gaps.
     """
 
-    def __init__(self, model, vae, char_to_id, device="cuda", seed=0, t_floor=8, max_words=11):
+    def __init__(self, model, vae, char_to_id, device="cuda", seed=LEYLA_SEED, t_floor=8, max_words=11):
         self.model = model
         self.vae = vae
         self.char_to_id = char_to_id
         self.device = device
-        self.seed = seed if seed is not None else 0
+        self.seed = LEYLA_SEED if seed is None else seed
         self.t_floor = t_floor
         self.max_words = max_words
         self.sample_rate = SAMPLE_RATE
@@ -164,13 +164,16 @@ class FreyaTTS:
 
         return cls(model, vae, char_to_id, device=device)
 
-    def synthesize(self, text: str, steps: int = 32, seed: int = 0) -> np.ndarray:
+    def synthesize(self, text: str, steps: int = 32, seed: int = LEYLA_SEED) -> np.ndarray:
         """Synthesize `text` and return a float32 waveform at 48 kHz.
 
         Args:
             text: Input text (Turkish).
             steps: Euler ODE steps for the flow-matching sampler.
-            seed: Noise seed. The default gives the model's canonical voice.
+            seed: Noise seed, which selects the speaker — the model has no speaker
+                conditioning, so x0 *is* the voice. The default (LEYLA_SEED) gives the
+                canonical Leyla voice deterministically; other seeds give other people,
+                and some are not Leyla at all.
         """
         wav, _, _ = self._synth(text, steps=steps, seed=seed)
         return wav
@@ -200,9 +203,7 @@ class FreyaTTS:
         T = max(self.t_floor, ids.shape[1] + 4, min(300, T))
 
         # fixed seed = fixed voice
-        torch.manual_seed(seed)
-        torch.cuda.manual_seed_all(seed)
-        latents = self.model.sample(ids, T, steps=steps, cmask=cmask)
+        latents = self.model.sample(ids, T, steps=steps, cmask=cmask, seed=seed)
 
         wav = self.vae.decode(latents.transpose(1, 2).float()).squeeze().float().cpu().numpy()
         return wav
