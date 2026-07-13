@@ -54,11 +54,16 @@ On [Freya-TR-Eval](https://huggingface.co/datasets/freyavoice/freya-tr-eval): **
 
 ## Citation
 
-```bib
-@techreport{freyatts2026,
-  title       = {FreyaTTS Technical Report},
-  author      = {{Freya Team}},
-  institution = {Freya Voice AI},
-  year        = {2026},
+FreyaTTS is described in our technical report, [arXiv:2607.09530](https://arxiv.org/abs/2607.09530):
+
+```bibtex
+@misc{pamuk2026freyattstechnicalreport,
+      title={FreyaTTS Technical Report}, 
+      author={Ahmet Erdem Pamuk and Ömer Yentür and Ahmet Tunga Bayrak and Yavuz Alp Sencer Öztürk and Mustafa Yavuz},
+      year={2026},
+      eprint={2607.09530},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2607.09530}, 
 }
 ```

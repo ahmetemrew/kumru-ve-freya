@@ -1,6 +1,7 @@
 <h2 align="center">FreyaTTS: An Efficient 183M Turkish Speech Foundation Model</h2>
 
 <p align="center">
+  <a href="https://arxiv.org/abs/2607.09530"><img src="https://img.shields.io/badge/arXiv-2607.09530-b31b1b" alt="arXiv"></a>
   <a href="https://huggingface.co/freyavoice/freya-tts"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-freya--tts-yellow" alt="Hugging Face"></a>
   <a href="https://huggingface.co/datasets/freyavoice/freya-tr-eval"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-Freya--TR--Eval-orange" alt="Eval Set"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-green" alt="License"></a>
@@ -140,11 +141,16 @@ FreyaTTS weights and code are released under the [Apache-2.0](LICENSE) license.
 
 ## Citation
 
-```bib
-@techreport{freyatts2026,
-  title       = {FreyaTTS Technical Report},
-  author      = {{Freya Team}},
-  institution = {Freya Voice AI},
-  year        = {2026},
+FreyaTTS is described in our technical report, [arXiv:2607.09530](https://arxiv.org/abs/2607.09530):
+
+```bibtex
+@misc{pamuk2026freyattstechnicalreport,
+      title={FreyaTTS Technical Report}, 
+      author={Ahmet Erdem Pamuk and Ömer Yentür and Ahmet Tunga Bayrak and Yavuz Alp Sencer Öztürk and Mustafa Yavuz},
+      year={2026},
+      eprint={2607.09530},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2607.09530}, 
 }
 ```
