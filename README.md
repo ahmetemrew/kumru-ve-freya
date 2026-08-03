@@ -1,6 +1,7 @@
 <h2 align="center">FreyaTTS-small: A Compact Tokenizer-Free Flow-Matching Transformer for Turkish-First Speech Synthesis</h2>
 
 <p align="center">
+  <a href="https://freyatts.freyavoice.ai"><img src="https://img.shields.io/badge/Project%20Page-freyatts.freyavoice.ai-1f4e79" alt="Project Page"></a>
   <a href="https://arxiv.org/abs/2607.09530"><img src="https://img.shields.io/badge/arXiv-2607.09530-b31b1b" alt="arXiv"></a>
   <a href="https://huggingface.co/freyavoice/freya-tts"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-freya--tts-yellow" alt="Hugging Face"></a>
   <a href="https://huggingface.co/datasets/freyavoice/freya-tr-eval"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-Freya--TR--Eval-orange" alt="Eval Set"></a>
@@ -10,6 +11,8 @@
 FreyaTTS-small is a **183M-parameter Turkish text-to-speech model**, and the open-source member of the FreyaTTS family. It reads Turkish directly at the character level (92 symbols, no phonemizer, no G2P) and generates speech with a **non-autoregressive conditional flow-matching DiT** in the frozen AudioVAE2 latent space (25 Hz, 64-dim latents, 16 kHz encode / 48 kHz decode).
 
 The result is a model that runs comfortably where 2B-class TTS models cannot: 1.5 GB of VRAM on a GPU, real time on a laptop CPU, and well under real time on the Apple Neural Engine.
+
+**Hear it first: [freyatts.freyavoice.ai](https://freyatts.freyavoice.ai)** has 48 kHz audio samples, the benchmark numbers, and an interactive 3D walkthrough of the architecture.
 
 > **The FreyaTTS family.** **FreyaTTS-small** (this repository) is our compact, Apache-2.0, self-hostable model, released in full: weights, inference code, and training pipeline. **FreyaTTS-large** is our production model, serving Turkish voice agents at [Freya (YC S25)](https://freyavoice.ai) with higher naturalness and expressivity; it is available commercially rather than as open weights. For access to FreyaTTS-large, contact us at **dev@freyavoice.ai**.
 >
@@ -26,7 +29,7 @@ The result is a model that runs comfortably where 2B-class TTS models cannot: 1.
 
 ### News
 
-- **[2026.07]** FreyaTTS-small 0.1.0 released: [weights](https://huggingface.co/freyavoice/freya-tts) | [eval set](https://huggingface.co/datasets/freyavoice/freya-tr-eval)
+- **[2026.07]** FreyaTTS-small 0.1.0 released: [project page](https://freyatts.freyavoice.ai) | [weights](https://huggingface.co/freyavoice/freya-tts) | [eval set](https://huggingface.co/datasets/freyavoice/freya-tr-eval)
 
 ---
 
