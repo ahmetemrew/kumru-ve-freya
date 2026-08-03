@@ -74,13 +74,13 @@ def load(model_id, device):
     else:
         cfg_path = hf_hub_download(model_id, "config.json")
         weights_path = hf_hub_download(model_id, "model.safetensors")
-    cfg = json.load(open(cfg_path))
+    cfg = json.load(open(cfg_path, encoding="utf-8"))
     model = FreyaDiT(vocab=cfg["vocab"], d=cfg["d"], depth=cfg["depth"],
                      heads=cfg["heads"], ff=cfg["ff"]).to(device).eval()
     model.load_state_dict(load_file(weights_path), strict=True)
     vae = load_audio_vae(device)
     vocab_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "freyatts", "char_vocab.json")
-    char_to_id = json.load(open(vocab_path))
+    char_to_id = json.load(open(vocab_path, encoding="utf-8"))
     return model, vae, char_to_id
 
 
