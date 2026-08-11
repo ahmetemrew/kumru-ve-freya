@@ -65,7 +65,7 @@ def chat_endpoint(req: ChatRequest, background_tasks: BackgroundTasks):
         
     try:
         # Instruct modeller için ChatML formatı
-        prompt = "<|im_start|>system\nSen akıllı, dostça ve Türkçe konuşan 'Kumru' adlı bir asistansın. İnsanlara çok kısa ve net cevaplar verirsin.<|im_end|>\n"
+        prompt = "<|im_start|>system\nSen yardımsever bir asistansın.<|im_end|>\n"
         recent_history = req.history[-10:]
         
         for msg in recent_history:
