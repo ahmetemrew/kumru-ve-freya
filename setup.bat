@@ -1,4 +1,5 @@
 @echo off
+cd /d "%~dp0"
 echo ===================================================
 echo Kumru x Freya Sesli Asistan - Kurulum Araci
 echo ===================================================
