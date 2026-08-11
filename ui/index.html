@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freya TTS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <i class="fa-solid fa-microphone-lines"></i>
+                <h1>Freya TTS</h1>
+            </div>
+            <p>Yeni Nesil Türkçe Ses Sentezi</p>
+        </header>
+
+        <main>
+            <div class="glass-card">
+                <div class="input-group">
+                    <label for="text-input">Seslendirmek İstediğiniz Metin</label>
+                    <textarea id="text-input" placeholder="Buraya bir şeyler yazın... (Örnek: Merhaba, benim adım Freya, size nasıl yardımcı olabilirim?)" rows="4"></textarea>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="input-group">
+                        <label for="seed-input">Ses Kimliği (Seed) <i class="fa-solid fa-circle-info" title="Sesi değiştirmek için herhangi bir sayı girin. Boş bırakırsanız varsayılan Leyla sesi kullanılır."></i></label>
+                        <input type="number" id="seed-input" placeholder="Örn: 42, 1234, 999" class="glass-input">
+                    </div>
+                    <div class="input-group">
+                        <label for="steps-input">Çözünürlük (Steps) <i class="fa-solid fa-circle-info" title="Kalite ve Hız dengesi. Varsayılan: 32"></i></label>
+                        <input type="number" id="steps-input" value="32" min="1" max="100" class="glass-input">
+                    </div>
+                </div>
+                
+                <button id="generate-btn" class="primary-btn">
+                    <span class="btn-text">Seslendir</span>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <div class="loader" id="loader"></div>
+                </button>
+            </div>
+
+            <div class="result-card glass-card hidden" id="result-card">
+                <h3><i class="fa-solid fa-headphones"></i> Sonuç</h3>
+                <audio id="audio-player" controls></audio>
+                <a id="download-btn" class="secondary-btn" download="freya_tts.wav">
+                    <i class="fa-solid fa-download"></i> İndir
+                </a>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Powered by Freya Voice AI &middot; Open Source</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

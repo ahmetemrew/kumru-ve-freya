@@ -11,3 +11,9 @@ voxcpm
 # faster-whisper
 # jiwer
 # datasets
+
+# Voice Assistant dependencies
+fastapi
+uvicorn
+pydantic
+llama-cpp-python

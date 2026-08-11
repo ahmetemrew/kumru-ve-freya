@@ -38,3 +38,8 @@ outputs/
 # environment and OS
 .env
 .DS_Store
+
+# Voice Assistant ignore rules
+*.gguf
+kumru_model/
+temp_audio/
