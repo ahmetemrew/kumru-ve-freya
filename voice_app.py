@@ -63,6 +63,7 @@ def chat_endpoint(req: ChatRequest, background_tasks: BackgroundTasks):
     if llm is None:
         raise HTTPException(status_code=500, detail="Kumru model is still downloading or not loaded.")
         
+    try:
         # Kara-Kumru, Llama-3 chat template'ini kullanır
         prompt = "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\nSen yardımsever bir asistansın.<|eot_id|>"
         recent_history = req.history[-10:]
