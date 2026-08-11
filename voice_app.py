@@ -27,7 +27,7 @@ print("FreyaTTS loaded.")
 try:
     from llama_cpp import Llama
     print("Loading Kumru 2B model...")
-    model_path = "kumru_model/kara-kumru.Q4_K_M.gguf"
+    model_path = "kumru_model/kumru-2b-Q4_K_M.gguf"
     llm = Llama(
         model_path=model_path,
         n_ctx=2048,
