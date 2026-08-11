@@ -27,7 +27,7 @@ print("FreyaTTS loaded.")
 try:
     from llama_cpp import Llama
     print("Loading Kumru 2B model...")
-    model_path = "kumru_model/kumru-2b-Q4_K_M.gguf"
+    model_path = "kumru_model/kara-kumru.Q4_K_M.gguf"
     llm = Llama(
         model_path=model_path,
         n_ctx=2048,
@@ -64,20 +64,20 @@ def chat_endpoint(req: ChatRequest, background_tasks: BackgroundTasks):
         raise HTTPException(status_code=500, detail="Kumru model is still downloading or not loaded.")
         
     try:
-        # Base modeller için Few-Shot diyalog formatı
-        prompt = "Aşağıdaki diyalog, akıllı, yardımsever ve Türkçe konuşan 'Kumru' adlı bir asistan ile bir insan arasında geçmektedir. Kumru kısa, net ve dostça cevaplar verir.\n\n"
+        # Instruct modeller için ChatML formatı
+        prompt = "<|im_start|>system\nSen akıllı, dostça ve Türkçe konuşan 'Kumru' adlı bir asistansın. İnsanlara çok kısa ve net cevaplar verirsin.<|im_end|>\n"
         recent_history = req.history[-10:]
         
         for msg in recent_history:
-            role = "İnsan" if msg.role == "user" else "Kumru"
-            prompt += f"{role}: {msg.content}\n"
+            role = "user" if msg.role == "user" else "assistant"
+            prompt += f"<|im_start|>{role}\n{msg.content}<|im_end|>\n"
             
-        prompt += "Kumru:"
+        prompt += "<|im_start|>assistant\n"
         
         response = llm(
             prompt,
             max_tokens=150,
-            stop=["\nİnsan:", "İnsan:", "\n\n"],
+            stop=["<|im_end|>", "\n<|im_start|>"],
             echo=False
         )
         
